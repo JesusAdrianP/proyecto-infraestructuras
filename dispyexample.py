@@ -6,9 +6,10 @@ def compute(n):
     return (host, n)
 
 if __name__ == '__main__':
-    import dispy, random
+    import dispy, random, time
     cluster = dispy.JobCluster(compute)
     jobs = []
+    time1 = time.time()
     for i in range(10):
         # schedule execution of 'compute' on a node (running 'dispynode')
         # with a parameter (random number in this case)
@@ -21,4 +22,6 @@ if __name__ == '__main__':
         print('%s executed job %s at %s with %s' % (host, job.id, job.start_time, n))
         # other fields of 'job' that may be useful:
         # print(job.stdout, job.stderr, job.exception, job.ip_addr, job.start_time, job.end_time)
+    time2 = time.time()
     cluster.print_status()
+    print("Tiempo final dispy:",time2-time1)
